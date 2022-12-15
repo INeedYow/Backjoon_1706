@@ -34,7 +34,8 @@ abbac
 예제 출력 1 
 abb
  */
-
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Backjoon_1706
 {
@@ -53,7 +54,7 @@ namespace Backjoon_1706
 
             ReadPuzzleTable(puzzleTable);
 
-            string fastestWordInOrder = "zzzzzzzzzzzzzzzzzzzz";
+			List<string> findWordsList = new List<string>();
 
             for (int r = 0; r < row; r++)
             {
@@ -63,26 +64,20 @@ namespace Backjoon_1706
                 {
                     if (puzzleTable[r, c] == '#')
                     {
-                        if (currentWord.Length > 1 && currentWord.CompareTo(fastestWordInOrder) == -1)
+                        if (currentWord.Length > 1 )
                         {
-                            fastestWordInOrder = currentWord; Console.WriteLine($"fastestWordInOrder : {fastestWordInOrder}");
-                        }
+							findWordsList.Add(currentWord);
+						}
 
                         currentWord = "";
                     }
-                    else
-                    {
+                    else{
                         currentWord = $"{currentWord}{puzzleTable[r, c]}";
                     }
-
-                    Console.WriteLine($"currentWord : {currentWord}");
                 }
 
-                if (currentWord.Length > 1 && currentWord.CompareTo(fastestWordInOrder) == -1)
-                {
-                    fastestWordInOrder = currentWord; Console.WriteLine($"fastestWordInOrder : {fastestWordInOrder}");
-                }
-                Console.WriteLine();
+                if (currentWord.Length > 1)
+					findWordsList.Add(currentWord);
             }
 
             for (int c = 0; c < col; c++)
@@ -93,30 +88,25 @@ namespace Backjoon_1706
                 {
                     if (puzzleTable[r, c] == '#')
                     {
-                        if (currentWord.Length > 1 && currentWord.CompareTo(fastestWordInOrder) == -1)
+                        if (currentWord.Length > 1 )
                         {
-                            fastestWordInOrder = currentWord; Console.WriteLine($"fastestWordInOrder : {fastestWordInOrder}");
-                        }
+							findWordsList.Add(currentWord);
+						}
                         
                         currentWord = "";
                     }
-                    else
-                    {
+                    else{
                         currentWord = $"{currentWord}{puzzleTable[r, c]}";
                     }
 
-                    Console.WriteLine($"currentWord : {currentWord}");
                 }
 
-                if (currentWord.Length > 1 && currentWord.CompareTo(fastestWordInOrder) == -1)
-                {
-                    fastestWordInOrder = currentWord; Console.WriteLine($"fastestWordInOrder : {fastestWordInOrder}");
-                }
-               Console.WriteLine();
+                if (currentWord.Length > 1)
+					findWordsList.Add(currentWord);
             }
 
 
-            Console.Write(fastestWordInOrder);
+            Console.WriteLine(findWordsList.Min());
         }
 
 
